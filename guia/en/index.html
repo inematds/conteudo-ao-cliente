@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>conteudo-ao-cliente — from content to client, without drowning</title>
+<meta name="description" content="Four free tools and one course: a topic radar, ideas based on your channels, ready-to-use carousels, material for commenters, and an agent for your routine.">
+<link rel="alternate" hreflang="pt-BR" href="https://inematds.github.io/conteudo-ao-cliente/guia/">
+<link rel="alternate" hreflang="en" href="https://inematds.github.io/conteudo-ao-cliente/guia/en/">
+<link rel="alternate" hreflang="es" href="https://inematds.github.io/conteudo-ao-cliente/guia/es/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0c10; --bg2:#14141b; --card:#16161e; --line:#272730;
+    --txt:#e9e9ee; --mut:#9a9aa6; --amb:#E2A23B; --amb2:#f0c070; --sky:#38bdf8; --pro:#cbd5e1;
+    color-scheme:dark;
+  }
+  body.light{
+    --bg:#f6f7f9; --bg2:#eceef2; --card:#ffffff; --line:#e1e3ea;
+    --txt:#1a1a22; --mut:#5b5b68; --amb:#b9791d; --amb2:#a16207; --sky:#0369a1; --pro:#b45309;
+    color-scheme:light;
+  }
+  body.light .hero .glow{opacity:.5}
+  body.light pre{background:#0e0e14;color:#d6d6e0}
+  body.light pre .c{color:#8a8a98}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:Sora,sans-serif;line-height:1.15;margin:0}
+  a{color:var(--amb);text-decoration:none}
+  code,pre{font-family:"JetBrains Mono",monospace}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+  .mut{color:var(--mut)} .amb{color:var(--amb)}
+  .chip{display:inline-block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amb);font-weight:600;font-family:Sora}
+  nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(12px);background:rgba(12,12,16,.78);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:22px;height:60px}
+  nav .brand{display:flex;align-items:center;gap:8px;font-family:Sora;font-weight:800;letter-spacing:-.02em;color:var(--amb)}
+  nav .brand .emoji{font-size:1.25rem}
+  nav .sep{color:var(--mut);opacity:.45}
+  nav .inema{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .inema:hover{filter:brightness(1.15)}
+  nav .pro{color:var(--pro);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .pro:hover{filter:brightness(1.15)}
+  nav .clubpro{display:inline-flex;align-items:center;gap:6px}
+  nav .links{margin-left:auto;display:flex;align-items:center;gap:20px;font-size:.92rem}
+  nav .links a.sec{color:var(--mut)} nav .links a.sec:hover{color:var(--txt)}
+  .lang{display:inline-flex;gap:2px;font-family:Sora;font-size:.78rem}
+  .lang a{color:var(--mut);padding:.2em .45em;border-radius:6px} .lang a.on{color:var(--amb);background:rgba(226,162,59,.12)}
+  .tgl{background:var(--bg2);border:1px solid var(--line);color:var(--txt);width:38px;height:38px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:1.05rem}
+  .tgl:hover{border-color:var(--amb)}
+  .btn{display:inline-block;background:var(--amb);color:#1a1206;font-weight:600;padding:.6em 1.05em;border-radius:10px;font-family:Sora}
+  .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+  @media(max-width:760px){nav .links a.sec{display:none}}
+  @media(max-width:520px){nav .wrap{gap:8px;padding:8px 14px;height:auto;flex-wrap:wrap} nav .links{gap:8px;margin-left:0;width:100%;justify-content:space-between} nav .btn{padding:.45em .7em;font-size:.82rem} .tgl{width:34px;height:34px}}
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero .glow{position:absolute;inset:-40% -20% auto auto;width:70%;height:600px;background:radial-gradient(closest-side,rgba(226,162,59,.22),transparent 70%);pointer-events:none}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:74px 22px}
+  .hero h1{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;letter-spacing:-.025em}
+  .hero p.lead{font-size:1.18rem;color:var(--mut);margin:1.1em 0 1.6em;max-width:34ch}
+  .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .hero figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000}
+  .hero figure img{width:100%;height:auto;display:block}
+  .resumo{padding:38px 0 34px;border-bottom:1px solid var(--line)}
+  .resumo p{font-size:1.12rem;line-height:1.7;max-width:74ch;margin:.55em 0 0}
+  @media(max-width:780px){.hero .wrap{grid-template-columns:1fr;padding:48px 22px}}
+  section{padding:62px 0;border-bottom:1px solid var(--line)}
+  section h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:800;letter-spacing:-.02em}
+  section .sub{color:var(--mut);margin:.6em 0 2em;max-width:62ch}
+  .grid{display:grid;gap:16px}
+  .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:820px){.g3,.g4{grid-template-columns:1fr 1fr}}
+  @media(max-width:540px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .card h3{font-size:1.05rem;margin-bottom:.4em}
+  .card p{color:var(--mut);font-size:.92rem;margin:0}
+  .num{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:8px;background:rgba(226,162,59,.14);color:var(--amb);font-family:Sora;font-weight:800;font-size:.9rem;margin-bottom:.7em}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+  .flow span{background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:.45em .9em;font-size:.85rem;font-family:Sora;font-weight:600}
+  .flow .arr{color:var(--amb);border:none;background:none;padding:0 .1em}
+  pre{background:#0a0a0e;border:1px solid var(--line);border-radius:12px;padding:16px 18px;overflow:auto;font-size:.86rem;line-height:1.6;color:#d6d6e0}
+  pre .c{color:#6f6f7c} pre .k{color:var(--amb2)} pre .s{color:#9ece6a}
+  .step{display:grid;grid-template-columns:46px minmax(0,1fr);gap:16px;margin-bottom:26px}
+  .step>div,.card{min-width:0}
+  p code,li code,td code{overflow-wrap:anywhere}
+  .step .b{width:46px;height:46px;border-radius:12px;background:var(--amb);color:#1a1206;font-family:Sora;font-weight:800;font-size:1.25rem;display:flex;align-items:center;justify-content:center}
+  .step h3{font-size:1.12rem;margin-bottom:.3em}
+  .step p{color:var(--mut);margin:.2em 0 .7em}
+  .ex{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:680px){.ex{grid-template-columns:1fr}}
+  .ex figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+  .ex figure img{width:100%;height:auto;display:block}
+  .ex figcaption{padding:12px 14px;font-size:.88rem;color:var(--mut);background:var(--card)}
+  .phase{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .phase:last-child{border:none}
+  .phase .tag{flex:0 0 92px;font-family:Sora;font-weight:800;color:var(--amb)}
+  .phase .d strong{display:block;margin-bottom:.2em}
+  .phase .d span{color:var(--mut);font-size:.92rem}
+  footer{padding:46px 0;text-align:center;color:var(--mut);font-size:.9rem}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.3em .8em;font-size:.78rem;color:var(--mut);margin:0 4px}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="brand" href="#top"><span class="emoji">🧭</span> conteudo-ao-cliente</a>
+  <span class="sep">|</span>
+  <span class="clubpro">
+    <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
+    <span class="sep">-</span>
+    <a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a>
+  </span>
+  <div class="links">
+    <a class="sec" href="#oque">What it is</a>
+    <a class="sec" href="#fluxo">How it works</a>
+    <a class="sec" href="#pecas">The 5 pieces</a>
+    <a class="sec" href="#guia">User guide</a>
+    <a class="sec" href="#roadmap">Where to start</a>
+    <span class="lang"><a href="../">PT</a><a class="on" href="./">EN</a><a href="../es/">ES</a></span>
+    <button class="tgl" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">🌙</button>
+    <a class="btn" href="https://github.com/inematds/conteudo-ao-cliente" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</div></nav>
+
+<header class="hero" id="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <div>
+      <span class="chip">Kit · 4 tools + 1 course</span>
+      <h1>From content to <span class="amb">client</span>, without drowning</h1>
+      <p class="lead">Know what to post today, repeat what already worked, create a post in minutes, and deliver material to commenters. An agent can handle the routine left over.</p>
+      <div class="cta">
+        <a class="btn" href="#pecas">See the 5 pieces</a>
+        <a class="btn ghost" href="#guia">Start the guide</a>
+      </div>
+    </div>
+    <figure><img src="../assets/banner-en.jpg" alt="Banner: From content to client: topic radar, ideas that work, ready-to-use carousel, comment to receive, agent for your routine"></figure>
+  </div>
+</header>
+
+<section id="resumo" class="resumo"><div class="wrap">
+  <span class="chip">In short</span>
+  <p>This page brings together five pieces that already exist separately at INEMA (the free AI club at inema.club) and shows how they fit together. There are four free tools that run in your computer's terminal with help from Claude Code (an AI assistant that works there), and one short course. They're for people who create content (on their own or at a small company) and get lost between choosing a topic, producing, publishing, and replying. Each piece handles one step: finding today's topic, seeing what has already worked on your channels, building the carousel, delivering material to commenters, and handing the rest of the routine to an agent. Each has its own guide and works on its own. You can use one or all five together.</p>
+  <div class="card" style="margin-top:20px;border-color:var(--amb)"><h3>⚠️ Before installing: these tools are set up for INEMA</h3><p>These are the four tools INEMA uses every day, and they work as shown here. The radar only covers AI topics. Generated text (headlines, ideas, guides, and replies) is in Portuguese, sometimes in the voice of someone who teaches AI. The carousel comes with INEMA's brand, colors, and cover art, and the lead-comenta page has INEMA in its title and footer. Changing the name, @, and hashtags is easy (in the carousel's <code>PERFIL.md</code>). Changing colors, language, and the rest means editing files, which Claude Code can help you with. If you create AI content in Portuguese, they work as shown. In the carousel, the final slide suggests an inema.club link as the free material (swap it for yours), and the cover carries the INEMA.CLUB brand; don't ask it to "post", because its automatic posting uses INEMA's account.</p></div>
+</div></section>
+
+<section id="oque"><div class="wrap">
+  <span class="chip">What it is</span>
+  <h2>One path, five pieces</h2>
+  <p class="sub">The problem isn't a lack of ideas. It's having to decide everything from scratch every day. Here, every tedious decision becomes a command.</p>
+  <figure style="margin:0 0 26px;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000"><img src="../assets/banner-grade-en.jpg" alt="The five pieces and the course's 30-day plan: topic radar, ideas that work, ready-to-use carousel, comment to receive, agent for your routine" loading="lazy" style="width:100%;display:block"></figure>
+  <div class="grid g3">
+    <div class="card"><h3>🧭 One step per piece</h3><p>Topic, idea, post, contact, and routine. Each tool does one thing and delivers a result you can check.</p></div>
+    <div class="card"><h3>💸 No paid API</h3><p>The tools read public sources (news sites and the public YouTube feed) and use Claude Code or Codex through your subscription.</p></div>
+    <div class="card"><h3>✋ You approve first</h3><p>Automation handles the preparation: topics, ideas, slides, and replies are ready. Nothing is posted or sent on its own; you review and decide what goes out.</p></div>
+  </div>
+</div></section>
+
+<section id="fluxo"><div class="wrap">
+  <span class="chip">How it works</span>
+  <h2>A day in the life of someone who posts</h2>
+  <p class="sub">The pieces follow the natural order of the work. One piece's output becomes the next one's input, but none depends on another to run.</p>
+  <div class="flow">
+    <span>📡 What's hot today</span><span class="arr">→</span>
+    <span>📈 What has worked for me</span><span class="arr">→</span>
+    <span>🖼️ The finished post</span><span class="arr">→</span>
+    <span>💬 Give material to commenters</span><span class="arr">→</span>
+    <span>🧹 Routine handled by an agent</span>
+  </div>
+</div></section>
+
+<section id="pecas"><div class="wrap">
+  <span class="chip">The 5 pieces</span>
+  <h2>What each one does</h2>
+  <p class="sub">Open each piece's guide to install and use it. All the guides are in Portuguese, English, and Spanish.</p>
+  <div class="grid g2">
+    <div class="card"><span class="num">1</span><h3>📡 radar-pautas</h3>
+      <p>Reads around 20 AI news sources (company blogs, press, Hacker News, and Reddit) and the GitHub projects that gained the most stars that week. Groups the same story from different sources, scores it, checks whether the link opens, and returns the 6 hottest topics from the past 24 hours. If you ask, it suggests a headline, hook, and format in Portuguese.</p>
+      <p style="margin-top:.7em"><strong>Requirements:</strong> Python 3. Claude Code is optional (only for headlines, which are in Portuguese). The "Trending on GitHub" source is included only if <code>gh</code> is installed and logged in; without it, the radar still works with news sites.</p>
+      <p style="margin-top:.9em"><a class="btn" href="https://inematds.github.io/radar-pautas/guia/en/" target="_blank" rel="noopener">Guide</a> <a class="btn ghost" href="https://github.com/inematds/radar-pautas" target="_blank" rel="noopener">GitHub</a></p></div>
+    <div class="card"><span class="num">2</span><h3>📈 muse-canais</h3>
+      <p>Looks at your YouTube channels and shows which recent videos are performing well above each channel's usual level. It calculates how many views per hour each video gets and compares that with a typical video on the same channel. Videos that pass 2 times the usual level become "winners" and, if you ask, turn into 8 new video ideas.</p>
+      <p style="margin-top:.7em"><strong>Requirements:</strong> Python 3. Ideas use Claude Code through your subscription. It doesn't use the YouTube API.</p>
+      <p style="margin-top:.9em"><a class="btn" href="https://inematds.github.io/muse-canais/guia/en/" target="_blank" rel="noopener">Guide</a> <a class="btn ghost" href="https://github.com/inematds/muse-canais" target="_blank" rel="noopener">GitHub</a></p></div>
+    <div class="card"><span class="num">3</span><h3>🖼️ carrossel-inema</h3>
+      <p>A Claude Code skill that creates Instagram and TikTok carousels (the same images also work on Facebook). Give it a topic and get a cover, 5 to 10 slides with one idea each, a final slide saying "comment WORD," and 3 stories, all at the right size. Before showing you, it checks whether any text is cut off or too small.</p>
+      <p style="margin-top:.7em"><strong>Requirements:</strong> Linux or Mac (on Windows, use WSL, the Linux environment that runs inside Windows), Node.js 18 or newer, Python 3 with Pillow, Chromium, and Claude Code. For cover art, use Codex signed in to your ChatGPT account. The <code>PERFIL.md</code> file comes with INEMA's brand (name, @, sign-off, and hashtags) and Portuguese text: replace them with your own before making your first carousel.</p>
+      <p style="margin-top:.9em"><a class="btn" href="https://inematds.github.io/carrossel-inema/guia/en/" target="_blank" rel="noopener">Guide</a> <a class="btn ghost" href="https://github.com/inematds/carrossel-inema" target="_blank" rel="noopener">GitHub</a></p></div>
+    <div class="card"><span class="num">4</span><h3>💬 lead-comenta</h3>
+      <p>Creates the "free material" page you promise when you say, "comment WORD and I'll send it to you." Give it a word, a topic, and a source (a page or a text). It writes a short 4 to 7-step guide using only what's in the source, creates the page, and prepares replies for the comment, direct message, and story.</p>
+      <p style="margin-top:.7em"><strong>Requirements:</strong> Python 3, Claude Code, <code>gh</code>, and a GitHub account. The page is hosted for free with your account's GitHub Pages. The guide and replies are in Portuguese, and the generated page has an INEMA.CLUB credit in the footer that the tool doesn't yet let you change.</p>
+      <p style="margin-top:.9em"><a class="btn" href="https://inematds.github.io/lead-comenta/guia/en/" target="_blank" rel="noopener">Guide</a> <a class="btn ghost" href="https://github.com/inematds/lead-comenta" target="_blank" rel="noopener">GitHub</a></p></div>
+    <div class="card" style="grid-column:1/-1"><span class="num">5</span><h3>🧹 Course: Hand off tedious work to an agent</h3>
+      <p>Weekly reports, new contacts, invoices, new clients: tasks that take hours and don't require genius. In 8 lessons of about 15 minutes each (around 2 hours in total), you'll find the first task to delegate, write the agent's profile, review drafts before anything is sent, choose the right model for each task, and leave with a 30-day plan.</p>
+      <p style="margin-top:.7em"><strong>Requirements:</strong> Just read and practice. Exercises work in chat (ChatGPT, Claude, or Gemini) or in the terminal, with no paid API.</p>
+      <p style="margin-top:.9em"><a class="btn" href="https://inematds.github.io/trabalho-chato-ao-agente-v72/en/" target="_blank" rel="noopener">Open the course</a></p></div>
+  </div>
+</div></section>
+
+<section id="pre"><div class="wrap">
+  <span class="chip">Prerequisites</span>
+  <h2>What to have on your computer</h2>
+  <p class="sub">Each piece has its own requirements; check its card. This is the complete setup for all four tools on a Linux, Mac, or Windows computer with WSL (the Linux environment that runs inside Windows). Commands run in the terminal, the window where you type commands. Each tool's guide has more detailed installation steps.</p>
+  <div class="grid g2">
+    <div class="card"><h3>Python 3, Git, and gh</h3><p>Python runs radar-pautas, muse-canais, and lead-comenta. Git downloads the projects. <code>gh</code> is GitHub's command-line tool: it publishes the lead-comenta page and enables radar-pautas's "Trending on GitHub" source. If Ubuntu can't find the <code>gh</code> package, follow the instructions at <a href="https://cli.github.com" target="_blank" rel="noopener">cli.github.com</a>.</p><pre><span class="c"># Ubuntu or WSL</span>
+<span class="k">sudo apt install</span> python3 git gh
+<span class="c"># Mac</span>
+<span class="k">brew install</span> python git gh</pre></div>
+    <div class="card"><h3>Node.js 18+, Chromium, and Pillow (carousel)</h3><p>Node and Chromium (a browser that runs without a window) render the slides; Pillow (a Python image library) helps with checks. Node also installs Codex. On Ubuntu, the last command installs the libraries Chromium needs; without them, the carousel's <code>setup.sh</code> fails.</p><pre><span class="c"># Ubuntu or WSL</span>
+<span class="k">sudo snap install</span> node --classic
+<span class="k">sudo apt install</span> python3-pil
+<span class="k">npx playwright install</span> chromium
+<span class="k">sudo npx playwright install-deps</span> chromium
+<span class="c"># Mac</span>
+<span class="k">brew install</span> node
+<span class="k">brew install</span> pillow
+<span class="k">brew install</span> --cask google-chrome   <span class="c"># on Mac, the carousel uses Google Chrome</span></pre><p>On Ubuntu, <code>npx</code> may ask "Ok to proceed?": answer <code>y</code>.</p></div>
+    <div class="card" style="grid-column:1/-1"><h3>Claude Code (and Codex, optional)</h3><p>Claude Code is Anthropic's assistant that works in the terminal; here it writes headlines, ideas, slides, and text. Install it from the official site at <a href="https://claude.com/claude-code" target="_blank" rel="noopener">claude.com/claude-code</a>. You need a paid Claude plan (Pro or higher) and must sign in once. Codex is OpenAI's equivalent: it only creates the carousel cover art through your ChatGPT account. None of the tools use an API key.</p><pre><span class="c"># opens and asks you to sign in the first time</span>
+<span class="k">claude</span>
+<span class="k">sudo npm install -g</span> @openai/codex   <span class="c"># optional, only for the cover (on Mac, omit sudo)</span>
+<span class="k">codex login</span></pre></div>
+  </div>
+</div></section>
+
+<section id="guia"><div class="wrap">
+  <span class="chip">User guide · step by step</span>
+  <h2>A day of content, from start to finish</h2>
+  <p class="sub">The commands below are the first ones in each guide. Each piece's guide explains the options and settings.</p>
+
+  <div class="step"><div class="b">1</div><div>
+    <h3>Find today's topic</h3>
+    <p>The radar shows the 6 topics without saving anything. Choose one.</p>
+<pre><span class="k">git clone</span> <span class="s">https://github.com/inematds/radar-pautas</span> ~/projetos/radar-pautas
+<span class="k">cd</span> ~/projetos/radar-pautas
+<span class="k">python3 radar.py --dry</span>       <span class="c"># 6 topics, nothing saved</span>
+<span class="k">python3 radar.py --angulos</span>   <span class="c"># saves + headline, hook, and format (Claude Code)</span></pre>
+    <p>With <code>--angulos</code>, the result is saved to <code>~/projetos/output/radar-pautas/&lt;date&gt;/radar.html</code>; open that file in your browser. The suggested format may be a carousel or an INEMA video format; outside INEMA, use just the headline and hook.</p>
+  </div></div>
+
+  <div class="step"><div class="b">2</div><div>
+    <h3>See what has already worked on your YouTube channels</h3>
+    <p>Download muse-canais and find your channel ID (it starts with <code>UC</code>), replacing the address with your channel's:</p>
+<pre><span class="k">git clone</span> <span class="s">https://github.com/inematds/muse-canais</span> ~/projetos/muse-canais
+<span class="k">cd</span> ~/projetos/muse-canais
+<span class="k">python3 -c</span> <span class="s">"import muse; print(muse.resolver_id('https://www.youtube.com/@mychannel'))"</span></pre>
+    <p>The <code>canais.json</code> file comes with INEMA's channels. Open it in an editor (<code>nano canais.json</code>), <strong>delete everything</strong>, and leave only your channel in this format (save with Ctrl+O, Enter, and Ctrl+X):</p>
+<pre>{"mychannel": {"nome": "My channel", "url": "https://www.youtube.com/@mychannel", "id": "UC..."}}</pre>
+    <p>Then run muse-canais. The report is saved to <code>~/projetos/output/muse-canais/&lt;date&gt;/muse.md</code>.</p>
+<pre><span class="k">python3 muse.py --ideias</span>     <span class="c"># report + 8 video ideas</span></pre>
+    <p>If no recent video passes 2 times the channel's usual level (or has fewer than 50 views), the report won't have winners or ideas. That's normal: run it again after publishing more.</p>
+  </div></div>
+
+  <div class="step"><div class="b">3</div><div>
+    <h3>Create the carousel</h3>
+    <p>Install the skill once (a skill is a package of instructions and scripts that teaches Claude Code to do a task). Then open Claude Code and ask: <strong>"make a carousel about &lt;chosen topic&gt;"</strong>. It shows you the finished images to approve; you post them yourself, by hand. Before the first one, replace INEMA's brand with yours in <code>PERFIL.md</code>. You can also ask Claude Code: <strong>"fill out PERFIL.md with me"</strong>.</p>
+<pre><span class="k">git clone</span> <span class="s">https://github.com/inematds/carrossel-inema</span> ~/projetos/carrossel-inema
+<span class="k">cd</span> ~/projetos/carrossel-inema
+<span class="k">bash setup.sh</span>                <span class="c"># must end with SELFTEST PASS</span>
+<span class="k">mkdir -p</span> ~/.claude/skills
+<span class="k">ln -s</span> "$PWD" ~/.claude/skills/carrossel-inema   <span class="c"># connects the skill to Claude Code</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">4</div><div>
+    <h3>Prepare material for commenters</h3>
+    <p>Before posting "comment WORD," the material page needs to be live <strong>in your account</strong> on GitHub. Otherwise, replies will include a link that isn't yours. You only need to do this once: sign in to GitHub, create your copy, enable GitHub Pages (GitHub's free service for hosting pages), and save your address. Replace <code>YOUR-USERNAME</code> with your username, which <code>gh api user</code> displays. The <code>--scopes workflow</code> option gives the login permission to publish the page automatically; the lead-comenta guide explains each login prompt.</p>
+<pre><span class="k">git clone</span> <span class="s">https://github.com/inematds/lead-comenta</span> ~/projetos/lead-comenta
+<span class="k">cd</span> ~/projetos/lead-comenta
+<span class="k">gh auth login</span> --scopes workflow
+<span class="k">git config</span> --global user.name <span class="s">"Your Name"</span>
+<span class="k">git config</span> --global user.email <span class="s">"you@example.com"</span>
+<span class="k">gh api user</span> -q .login           <span class="c"># your username</span>
+<span class="k">gh repo create</span> lead-comenta --public --source . --remote meu
+<span class="k">git push</span> meu main
+<span class="k">gh api</span> -X POST repos/YOUR-USERNAME/lead-comenta/pages -f build_type=workflow</pre>
+    <p>Save your address so it's available in every new terminal. On Ubuntu or WSL:</p>
+<pre><span class="k">echo</span> <span class="s">'export LEAD_BASE_URL=https://YOUR-USERNAME.github.io/lead-comenta/paginas'</span> &gt;&gt; ~/.bashrc
+<span class="k">source</span> ~/.bashrc</pre>
+    <p>On Mac:</p>
+<pre><span class="k">echo</span> <span class="s">'export LEAD_BASE_URL=https://YOUR-USERNAME.github.io/lead-comenta/paginas'</span> &gt;&gt; ~/.zshrc
+<span class="k">source</span> ~/.zshrc</pre>
+    <p>Your copy comes with the example word AGENTE, which points to INEMA's address; always use a word of your own. For each post (replace TIPS, the topic, and the source with your own):</p>
+<pre><span class="k">python3 lead.py nova</span> TIPS --tema <span class="s">"6 tedious tasks an agent can handle"</span> --fonte <span class="s">https://inematds.github.io/empresa-de-ia/guia/en/</span>
+<span class="k">python3 lead.py resposta</span> TIPS    <span class="c"># text for the comment, direct message, and story</span>
+<span class="k">git add</span> -A &amp;&amp; <span class="k">git commit</span> -m <span class="s">"TIPS guide"</span> &amp;&amp; <span class="k">git push</span> meu main   <span class="c"># publishes the page</span></pre>
+    <p>The page takes a few minutes to appear. Open the link shown by <code>lead.py resposta</code> before posting the invitation.</p>
+  </div></div>
+
+  <div class="step"><div class="b">5</div><div>
+    <h3>Hand the rest of the routine to an agent</h3>
+    <p>Reports, new contacts, invoices, new clients. The course shows how to set up the agent's profile and review its work before sending. The 30-day plan in the banner is the course's final lesson.</p>
+<pre><span class="c"># in your browser</span>
+<span class="s">https://inematds.github.io/trabalho-chato-ao-agente-v72/en/</span></pre>
+  </div></div>
+</div></section>
+
+<section id="roadmap"><div class="wrap">
+  <span class="chip">Where to start</span>
+  <h2>Start with one piece, not all five</h2>
+  <p class="sub">Trying to set everything up on day one puts you back where you started. One piece per week works better.</p>
+  <div class="phase"><div class="tag">Week 1</div><div class="d"><strong>Radar</strong><span>Run the radar each morning for a week and just choose a topic. Don't create more than you already do.</span></div></div>
+  <div class="phase"><div class="tag">Week 2</div><div class="d"><strong>Carousel</strong><span>Turn the chosen topic into a carousel. Review the result before posting.</span></div></div>
+  <div class="phase"><div class="tag">Week 3</div><div class="d"><strong>Comment and receive</strong><span>Use "comment WORD" on one of your carousels with the lead-comenta page already live.</span></div></div>
+  <div class="phase"><div class="tag">Week 4</div><div class="d"><strong>Muse + course</strong><span>If you have a YouTube channel, muse-canais shows what to repeat based on the videos already there. The course helps you hand off your first repetitive task.</span></div></div>
+</div></section>
+
+<footer>
+  <div class="wrap">
+    <div class="pill">Python</div><div class="pill">Node.js</div><div class="pill">Claude Code</div><div class="pill">GitHub Pages</div>
+    <p style="margin-top:18px">conteudo-ao-cliente · 4 free tools + 1 course ·
+      <a href="https://github.com/inematds/conteudo-ao-cliente">inematds/conteudo-ao-cliente</a> ·
+      <a href="https://inema.club">INEMA.CLUB</a></p>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var KEY='conteudo-ao-cliente-theme';
+    var b=document.body, t=document.getElementById('themeToggle');
+    if(localStorage.getItem(KEY)==='light'){ b.classList.add('light'); t.textContent='☀️'; }
+    t.addEventListener('click',function(){
+      var light=b.classList.toggle('light');
+      t.textContent=light?'☀️':'🌙';
+      localStorage.setItem(KEY, light?'light':'dark');
+    });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>conteudo-ao-cliente — do conteúdo ao cliente, sem se afogar</title>
+<meta name="description" content="Quatro ferramentas gratuitas e um curso: radar de pautas, ideias a partir dos seus canais, carrossel pronto, material para quem comenta e um agente na rotina.">
+<link rel="alternate" hreflang="pt-BR" href="https://inematds.github.io/conteudo-ao-cliente/guia/">
+<link rel="alternate" hreflang="en" href="https://inematds.github.io/conteudo-ao-cliente/guia/en/">
+<link rel="alternate" hreflang="es" href="https://inematds.github.io/conteudo-ao-cliente/guia/es/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0c10; --bg2:#14141b; --card:#16161e; --line:#272730;
+    --txt:#e9e9ee; --mut:#9a9aa6; --amb:#E2A23B; --amb2:#f0c070; --sky:#38bdf8; --pro:#cbd5e1;
+    color-scheme:dark;
+  }
+  body.light{
+    --bg:#f6f7f9; --bg2:#eceef2; --card:#ffffff; --line:#e1e3ea;
+    --txt:#1a1a22; --mut:#5b5b68; --amb:#b9791d; --amb2:#a16207; --sky:#0369a1; --pro:#b45309;
+    color-scheme:light;
+  }
+  body.light .hero .glow{opacity:.5}
+  body.light pre{background:#0e0e14;color:#d6d6e0}
+  body.light pre .c{color:#8a8a98}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:Sora,sans-serif;line-height:1.15;margin:0}
+  a{color:var(--amb);text-decoration:none}
+  code,pre{font-family:"JetBrains Mono",monospace}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+  .mut{color:var(--mut)} .amb{color:var(--amb)}
+  .chip{display:inline-block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amb);font-weight:600;font-family:Sora}
+  nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(12px);background:rgba(12,12,16,.78);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:22px;height:60px}
+  nav .brand{display:flex;align-items:center;gap:8px;font-family:Sora;font-weight:800;letter-spacing:-.02em;color:var(--amb)}
+  nav .brand .emoji{font-size:1.25rem}
+  nav .sep{color:var(--mut);opacity:.45}
+  nav .inema{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .inema:hover{filter:brightness(1.15)}
+  nav .pro{color:var(--pro);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .pro:hover{filter:brightness(1.15)}
+  nav .clubpro{display:inline-flex;align-items:center;gap:6px}
+  nav .links{margin-left:auto;display:flex;align-items:center;gap:20px;font-size:.92rem}
+  nav .links a.sec{color:var(--mut)} nav .links a.sec:hover{color:var(--txt)}
+  .lang{display:inline-flex;gap:2px;font-family:Sora;font-size:.78rem}
+  .lang a{color:var(--mut);padding:.2em .45em;border-radius:6px} .lang a.on{color:var(--amb);background:rgba(226,162,59,.12)}
+  .tgl{background:var(--bg2);border:1px solid var(--line);color:var(--txt);width:38px;height:38px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:1.05rem}
+  .tgl:hover{border-color:var(--amb)}
+  .btn{display:inline-block;background:var(--amb);color:#1a1206;font-weight:600;padding:.6em 1.05em;border-radius:10px;font-family:Sora}
+  .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+  @media(max-width:760px){nav .links a.sec{display:none}}
+  @media(max-width:520px){nav .wrap{gap:8px;padding:8px 14px;height:auto;flex-wrap:wrap} nav .links{gap:8px;margin-left:0;width:100%;justify-content:space-between} nav .btn{padding:.45em .7em;font-size:.82rem} .tgl{width:34px;height:34px}}
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero .glow{position:absolute;inset:-40% -20% auto auto;width:70%;height:600px;background:radial-gradient(closest-side,rgba(226,162,59,.22),transparent 70%);pointer-events:none}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:74px 22px}
+  .hero h1{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;letter-spacing:-.025em}
+  .hero p.lead{font-size:1.18rem;color:var(--mut);margin:1.1em 0 1.6em;max-width:34ch}
+  .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .hero figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000}
+  .hero figure img{width:100%;height:auto;display:block}
+  .resumo{padding:38px 0 34px;border-bottom:1px solid var(--line)}
+  .resumo p{font-size:1.12rem;line-height:1.7;max-width:74ch;margin:.55em 0 0}
+  @media(max-width:780px){.hero .wrap{grid-template-columns:1fr;padding:48px 22px}}
+  section{padding:62px 0;border-bottom:1px solid var(--line)}
+  section h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:800;letter-spacing:-.02em}
+  section .sub{color:var(--mut);margin:.6em 0 2em;max-width:62ch}
+  .grid{display:grid;gap:16px}
+  .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:820px){.g3,.g4{grid-template-columns:1fr 1fr}}
+  @media(max-width:540px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .card h3{font-size:1.05rem;margin-bottom:.4em}
+  .card p{color:var(--mut);font-size:.92rem;margin:0}
+  .num{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:8px;background:rgba(226,162,59,.14);color:var(--amb);font-family:Sora;font-weight:800;font-size:.9rem;margin-bottom:.7em}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+  .flow span{background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:.45em .9em;font-size:.85rem;font-family:Sora;font-weight:600}
+  .flow .arr{color:var(--amb);border:none;background:none;padding:0 .1em}
+  pre{background:#0a0a0e;border:1px solid var(--line);border-radius:12px;padding:16px 18px;overflow:auto;font-size:.86rem;line-height:1.6;color:#d6d6e0}
+  pre .c{color:#6f6f7c} pre .k{color:var(--amb2)} pre .s{color:#9ece6a}
+  .step{display:grid;grid-template-columns:46px minmax(0,1fr);gap:16px;margin-bottom:26px}
+  .step>div,.card{min-width:0}
+  p code,li code,td code{overflow-wrap:anywhere}
+  .step .b{width:46px;height:46px;border-radius:12px;background:var(--amb);color:#1a1206;font-family:Sora;font-weight:800;font-size:1.25rem;display:flex;align-items:center;justify-content:center}
+  .step h3{font-size:1.12rem;margin-bottom:.3em}
+  .step p{color:var(--mut);margin:.2em 0 .7em}
+  .ex{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:680px){.ex{grid-template-columns:1fr}}
+  .ex figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+  .ex figure img{width:100%;height:auto;display:block}
+  .ex figcaption{padding:12px 14px;font-size:.88rem;color:var(--mut);background:var(--card)}
+  .phase{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .phase:last-child{border:none}
+  .phase .tag{flex:0 0 92px;font-family:Sora;font-weight:800;color:var(--amb)}
+  .phase .d strong{display:block;margin-bottom:.2em}
+  .phase .d span{color:var(--mut);font-size:.92rem}
+  footer{padding:46px 0;text-align:center;color:var(--mut);font-size:.9rem}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.3em .8em;font-size:.78rem;color:var(--mut);margin:0 4px}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="brand" href="#top"><span class="emoji">🧭</span> conteudo-ao-cliente</a>
+  <span class="sep">|</span>
+  <span class="clubpro">
+    <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
+    <span class="sep">-</span>
+    <a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a>
+  </span>
+  <div class="links">
+    <a class="sec" href="#oque">O que é</a>
+    <a class="sec" href="#fluxo">Como funciona</a>
+    <a class="sec" href="#pecas">As 5 peças</a>
+    <a class="sec" href="#guia">Guia de uso</a>
+    <a class="sec" href="#roadmap">Por onde começar</a>
+    <span class="lang"><a class="on" href="./">PT</a><a href="en/">EN</a><a href="es/">ES</a></span>
+    <button class="tgl" id="themeToggle" aria-label="Alternar tema" title="Alternar tema">🌙</button>
+    <a class="btn" href="https://github.com/inematds/conteudo-ao-cliente" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</div></nav>
+
+<header class="hero" id="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <div>
+      <span class="chip">Kit · 4 ferramentas + 1 curso</span>
+      <h1>Do conteúdo ao <span class="amb">cliente</span>, sem se afogar</h1>
+      <p class="lead">Saiba o que postar hoje, repita o que já deu certo, faça o post em minutos e entregue o material a quem comenta. O que sobrar de rotina, um agente faz.</p>
+      <div class="cta">
+        <a class="btn" href="#pecas">Ver as 5 peças</a>
+        <a class="btn ghost" href="#guia">Começar o guia</a>
+      </div>
+    </div>
+    <figure><img src="assets/banner.jpg" alt="Banner Do conteúdo ao cliente: radar de pautas, ideias que funcionam, carrossel pronto, comenta e recebe, agente na rotina"></figure>
+  </div>
+</header>
+
+<section id="resumo" class="resumo"><div class="wrap">
+  <span class="chip">Em resumo</span>
+  <p>Esta página junta cinco peças que já existem separadas no INEMA (o clube gratuito de IA em inema.club) e mostra como elas se encaixam. São quatro ferramentas gratuitas, que rodam no terminal do seu computador com a ajuda do Claude Code (um assistente de IA que trabalha ali), e um curso curto. Servem para quem cria conteúdo (sozinho ou numa empresa pequena) e se perde entre escolher o assunto, produzir, publicar e responder. Cada peça cuida de uma etapa: achar a pauta do dia, ver o que já funcionou nos seus canais, montar o carrossel, entregar o material para quem comenta e passar o resto da rotina para um agente. Cada uma tem o seu guia e funciona sozinha. Você pode usar uma só ou as cinco juntas.</p>
+  <div class="card" style="margin-top:20px;border-color:var(--amb)"><h3>⚠️ Antes de instalar: elas vêm configuradas para o INEMA</h3><p>As quatro ferramentas são as que o INEMA usa no dia a dia e saem como estão aqui. O radar só tem pautas de inteligência artificial. Os textos gerados (manchetes, ideias, guias e respostas) saem em português, alguns na voz de quem ensina IA. O carrossel vem com a marca, as cores e a capa do INEMA, e a página do lead-comenta leva o nome INEMA no título e no rodapé. Trocar nome, @ e hashtags é fácil (no <code>PERFIL.md</code> do carrossel). Cores, idioma e o resto pedem mexer nos arquivos, e o Claude Code pode fazer isso com você. Se você cria conteúdo de IA em português, servem como estão. No carrossel, o slide final sugere um link do inema.club como material grátis (troque pelo seu), e a capa leva a marca INEMA.CLUB; não peça para ele "postar", porque a postagem automática dele usa a conta do INEMA.</p></div>
+</div></section>
+
+<section id="oque"><div class="wrap">
+  <span class="chip">O que é</span>
+  <h2>Um caminho, cinco peças</h2>
+  <p class="sub">O problema não é falta de ideia. É ter de decidir tudo do zero todo dia. Aqui cada decisão chata vira um comando.</p>
+  <figure style="margin:0 0 26px;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000"><img src="assets/banner-grade.jpg" alt="As cinco peças e o plano de 30 dias do curso: radar de pautas, ideias que funcionam, carrossel pronto, comenta e recebe, agente na rotina" loading="lazy" style="width:100%;display:block"></figure>
+  <div class="grid g3">
+    <div class="card"><h3>🧭 Uma etapa por peça</h3><p>Pauta, ideia, post, contato e rotina. Cada ferramenta faz uma coisa só e entrega um resultado que dá para conferir.</p></div>
+    <div class="card"><h3>💸 Sem API paga</h3><p>As ferramentas leem fontes públicas (sites de notícias, o feed público do YouTube) e usam o Claude Code ou o Codex pela sua assinatura.</p></div>
+    <div class="card"><h3>✋ Você aprova antes</h3><p>O automático é a preparação: pauta, ideias, slides e respostas saem prontos. Nada é postado nem enviado sozinho; você olha e decide o que sai.</p></div>
+  </div>
+</div></section>
+
+<section id="fluxo"><div class="wrap">
+  <span class="chip">Como funciona</span>
+  <h2>A ordem do dia de quem posta</h2>
+  <p class="sub">As peças seguem a ordem natural do trabalho. A saída de uma vira a entrada da próxima, mas nenhuma depende da outra para rodar.</p>
+  <div class="flow">
+    <span>📡 O que está quente hoje</span><span class="arr">→</span>
+    <span>📈 O que já funcionou comigo</span><span class="arr">→</span>
+    <span>🖼️ O post pronto</span><span class="arr">→</span>
+    <span>💬 Quem comenta recebe o material</span><span class="arr">→</span>
+    <span>🧹 A rotina com um agente</span>
+  </div>
+</div></section>
+
+<section id="pecas"><div class="wrap">
+  <span class="chip">As 5 peças</span>
+  <h2>O que cada uma faz</h2>
+  <p class="sub">Clique no guia de cada peça para instalar e usar. Todos os guias estão em português, inglês e espanhol.</p>
+  <div class="grid g2">
+    <div class="card"><span class="num">1</span><h3>📡 radar-pautas</h3>
+      <p>Lê cerca de 20 fontes de notícias de IA (blogs das empresas, imprensa, Hacker News e Reddit) e os projetos que mais ganharam estrelas no GitHub na semana. Junta a mesma notícia vinda de vários lugares, dá uma nota, confere se o link abre e devolve as 6 pautas mais quentes das últimas 24 horas. Se você pedir, sugere manchete, gancho e formato em português.</p>
+      <p style="margin-top:.7em"><strong>Precisa:</strong> Python 3. O Claude Code é opcional (só para as manchetes, que saem em português). A fonte "GitHub em alta" só entra com o <code>gh</code> instalado e logado; sem ele, o radar segue com os sites.</p>
+      <p style="margin-top:.9em"><a class="btn" href="https://inematds.github.io/radar-pautas/guia/" target="_blank" rel="noopener">Guia</a> <a class="btn ghost" href="https://github.com/inematds/radar-pautas" target="_blank" rel="noopener">GitHub</a></p></div>
+    <div class="card"><span class="num">2</span><h3>📈 muse-canais</h3>
+      <p>Olha os seus canais do YouTube e mostra quais vídeos recentes estão indo bem acima do normal de cada canal. Calcula quantas visualizações por hora cada vídeo ganha e compara com o vídeo típico do mesmo canal. Os que passam de 2 vezes viram "vencedores" e, se você pedir, viram 8 ideias novas de vídeo.</p>
+      <p style="margin-top:.7em"><strong>Precisa:</strong> Python 3. As ideias usam o Claude Code pela assinatura. Não usa a API do YouTube.</p>
+      <p style="margin-top:.9em"><a class="btn" href="https://inematds.github.io/muse-canais/guia/" target="_blank" rel="noopener">Guia</a> <a class="btn ghost" href="https://github.com/inematds/muse-canais" target="_blank" rel="noopener">GitHub</a></p></div>
+    <div class="card"><span class="num">3</span><h3>🖼️ carrossel-inema</h3>
+      <p>Skill para o Claude Code que faz carrosséis de Instagram e TikTok (as mesmas imagens servem no Facebook). Você dá o tema e recebe a capa, de 5 a 10 slides com uma ideia cada, o slide final com "comenta PALAVRA" e 3 stories, no tamanho certo. Antes de mostrar, confere se algum texto ficou cortado ou pequeno demais.</p>
+      <p style="margin-top:.7em"><strong>Precisa:</strong> Linux ou Mac (no Windows, pelo WSL, o Linux que roda dentro do Windows), Node.js 18 ou mais novo, Python 3 com Pillow, um Chromium e o Claude Code. Para a capa com arte, o Codex logado na sua conta do ChatGPT. O arquivo <code>PERFIL.md</code> vem com a marca do INEMA (nome, @, fecho e hashtags) e textos em português: troque pelos seus antes do primeiro carrossel.</p>
+      <p style="margin-top:.9em"><a class="btn" href="https://inematds.github.io/carrossel-inema/guia/" target="_blank" rel="noopener">Guia</a> <a class="btn ghost" href="https://github.com/inematds/carrossel-inema" target="_blank" rel="noopener">GitHub</a></p></div>
+    <div class="card"><span class="num">4</span><h3>💬 lead-comenta</h3>
+      <p>Cria a página do "material grátis" que você promete quando diz "comenta PALAVRA que eu te mando". Você dá a palavra, o tema e uma fonte (uma página ou um texto). Ele escreve um guia curto de 4 a 7 passos só com o que está na fonte, gera a página e os textos prontos para responder o comentário, a mensagem direta e o story.</p>
+      <p style="margin-top:.7em"><strong>Precisa:</strong> Python 3, Claude Code, o <code>gh</code> e uma conta no GitHub. A página fica no ar pelo GitHub Pages da sua conta, de graça. O guia e as respostas saem em português, e a página gerada tem no rodapé a assinatura do INEMA.CLUB, que a ferramenta ainda não deixa trocar.</p>
+      <p style="margin-top:.9em"><a class="btn" href="https://inematds.github.io/lead-comenta/guia/" target="_blank" rel="noopener">Guia</a> <a class="btn ghost" href="https://github.com/inematds/lead-comenta" target="_blank" rel="noopener">GitHub</a></p></div>
+    <div class="card" style="grid-column:1/-1"><span class="num">5</span><h3>🧹 Curso: Entregue o trabalho chato a um agente</h3>
+      <p>Relatório da semana, contato novo, nota fiscal, cliente novo: tarefas que tomam horas e não pedem genialidade. Em 8 aulas de cerca de 15 minutos (umas 2 horas no total) você acha a primeira tarefa a delegar, escreve a ficha do agente, vê o rascunho antes de qualquer coisa ser enviada, escolhe o modelo certo para cada tarefa e sai com um plano de 30 dias.</p>
+      <p style="margin-top:.7em"><strong>Precisa:</strong> só ler e praticar. Os exercícios funcionam no chat (ChatGPT, Claude ou Gemini) ou no terminal, sem API paga.</p>
+      <p style="margin-top:.9em"><a class="btn" href="https://inematds.github.io/trabalho-chato-ao-agente-v72/" target="_blank" rel="noopener">Abrir o curso</a></p></div>
+  </div>
+</div></section>
+
+<section id="pre"><div class="wrap">
+  <span class="chip">Pré-requisitos</span>
+  <h2>O que ter no computador</h2>
+  <p class="sub">Nem toda peça pede tudo; veja no card de cada uma. Este é o conjunto completo para as quatro ferramentas, num computador Linux, Mac ou Windows com WSL (o Linux que roda dentro do Windows). Os comandos rodam no terminal, a janela onde se digitam comandos. O guia de cada ferramenta tem a instalação em mais detalhe.</p>
+  <div class="grid g2">
+    <div class="card"><h3>Python 3, Git e gh</h3><p>O Python roda o radar, o muse e o lead-comenta. O Git baixa os projetos. O <code>gh</code> é o programa do GitHub para o terminal: publica a página do lead-comenta e liga a fonte "GitHub em alta" do radar. Se o Ubuntu não achar o pacote <code>gh</code>, siga <a href="https://cli.github.com" target="_blank" rel="noopener">cli.github.com</a>.</p><pre><span class="c"># Ubuntu ou WSL</span>
+<span class="k">sudo apt install</span> python3 git gh
+<span class="c"># Mac</span>
+<span class="k">brew install</span> python git gh</pre></div>
+    <div class="card"><h3>Node.js 18+, Chromium e Pillow (carrossel)</h3><p>O Node e o Chromium (um navegador que trabalha sem janela) desenham os slides; o Pillow (complemento de imagem do Python) ajuda na checagem. O Node também instala o Codex. No Ubuntu, o último comando instala as bibliotecas que o Chromium usa; sem elas o <code>setup.sh</code> do carrossel falha.</p><pre><span class="c"># Ubuntu ou WSL</span>
+<span class="k">sudo snap install</span> node --classic
+<span class="k">sudo apt install</span> python3-pil
+<span class="k">npx playwright install</span> chromium
+<span class="k">sudo npx playwright install-deps</span> chromium
+<span class="c"># Mac</span>
+<span class="k">brew install</span> node
+<span class="k">brew install</span> pillow
+<span class="k">brew install</span> --cask google-chrome   <span class="c"># no Mac, o carrossel usa o Google Chrome</span></pre><p>No Ubuntu, o <code>npx</code> pode perguntar "Ok to proceed?": responda <code>y</code>.</p></div>
+    <div class="card" style="grid-column:1/-1"><h3>Claude Code (e Codex, opcional)</h3><p>O Claude Code é o assistente da Anthropic que trabalha no terminal; aqui ele escreve manchetes, ideias, slides e textos. Instale pelo site oficial, <a href="https://claude.com/claude-code" target="_blank" rel="noopener">claude.com/claude-code</a>. Precisa de um plano pago do Claude (Pro ou acima) e do login, feito uma vez. O Codex é o equivalente da OpenAI: só faz a arte da capa do carrossel, pela sua conta do ChatGPT. Nenhuma das ferramentas usa chave de API.</p><pre><span class="c"># abre e pede o login na primeira vez</span>
+<span class="k">claude</span>
+<span class="k">sudo npm install -g</span> @openai/codex   <span class="c"># opcional, só para a capa (no Mac, sem sudo)</span>
+<span class="k">codex login</span></pre></div>
+  </div>
+</div></section>
+
+<section id="guia"><div class="wrap">
+  <span class="chip">Guia de uso · passo a passo</span>
+  <h2>Um dia de conteúdo, do começo ao fim</h2>
+  <p class="sub">Os comandos abaixo são os primeiros de cada guia. O guia de cada peça explica as opções e os ajustes.</p>
+
+  <div class="step"><div class="b">1</div><div>
+    <h3>Ache a pauta do dia</h3>
+    <p>O radar mostra as 6 pautas sem gravar nada. Escolha uma.</p>
+<pre><span class="k">git clone</span> <span class="s">https://github.com/inematds/radar-pautas</span> ~/projetos/radar-pautas
+<span class="k">cd</span> ~/projetos/radar-pautas
+<span class="k">python3 radar.py --dry</span>       <span class="c"># 6 pautas, sem gravar</span>
+<span class="k">python3 radar.py --angulos</span>   <span class="c"># grava + manchete, gancho e formato (Claude Code)</span></pre>
+    <p>Com <code>--angulos</code>, o resultado fica em <code>~/projetos/output/radar-pautas/&lt;data&gt;/radar.html</code>; abra esse arquivo no navegador. O formato sugerido pode ser carrossel ou nomes de formatos de vídeo do INEMA; fora do INEMA, use só a manchete e o gancho.</p>
+  </div></div>
+
+  <div class="step"><div class="b">2</div><div>
+    <h3>Veja o que já deu certo nos seus canais do YouTube</h3>
+    <p>Baixe o muse e descubra o ID do seu canal (começa com <code>UC</code>), trocando o endereço pelo do seu canal:</p>
+<pre><span class="k">git clone</span> <span class="s">https://github.com/inematds/muse-canais</span> ~/projetos/muse-canais
+<span class="k">cd</span> ~/projetos/muse-canais
+<span class="k">python3 -c</span> <span class="s">"import muse; print(muse.resolver_id('https://www.youtube.com/@meucanal'))"</span></pre>
+    <p>O arquivo <code>canais.json</code> vem com os canais do INEMA. Abra no editor (<code>nano canais.json</code>), <strong>apague tudo</strong> e deixe só o seu canal, neste formato (salve com Ctrl+O, Enter e Ctrl+X):</p>
+<pre>{"meucanal": {"nome": "Meu canal", "url": "https://www.youtube.com/@meucanal", "id": "UC..."}}</pre>
+    <p>Depois rode o muse. O relatório fica em <code>~/projetos/output/muse-canais/&lt;data&gt;/muse.md</code>.</p>
+<pre><span class="k">python3 muse.py --ideias</span>     <span class="c"># relatório + 8 ideias de vídeo</span></pre>
+    <p>Se nenhum vídeo recente passar de 2 vezes o normal do canal (ou tiver menos de 50 visualizações), o relatório sai sem vencedores e sem ideias. É normal: rode de novo depois de publicar mais.</p>
+  </div></div>
+
+  <div class="step"><div class="b">3</div><div>
+    <h3>Faça o carrossel</h3>
+    <p>Instale a skill uma vez (skill é um pacote de instruções e scripts que ensina o Claude Code a fazer uma tarefa). Depois, abra o Claude Code e peça: <strong>"faz um carrossel sobre &lt;a pauta escolhida&gt;"</strong>. Ele mostra as imagens prontas para você aprovar; a postagem é sua, à mão. Antes do primeiro, troque a marca do INEMA pela sua no <code>PERFIL.md</code>; você também pode pedir ao Claude Code: <strong>"preencha o PERFIL.md comigo"</strong>.</p>
+<pre><span class="k">git clone</span> <span class="s">https://github.com/inematds/carrossel-inema</span> ~/projetos/carrossel-inema
+<span class="k">cd</span> ~/projetos/carrossel-inema
+<span class="k">bash setup.sh</span>                <span class="c"># tem que terminar em SELFTEST PASS</span>
+<span class="k">mkdir -p</span> ~/.claude/skills
+<span class="k">ln -s</span> "$PWD" ~/.claude/skills/carrossel-inema   <span class="c"># liga a skill no Claude Code</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">4</div><div>
+    <h3>Prepare o material de quem comenta</h3>
+    <p>Antes de postar o "comenta PALAVRA", a página do material tem de estar no ar <strong>na sua conta</strong> do GitHub, senão as respostas levam um link que não é seu. Faça uma vez só: entre no GitHub, crie a sua cópia, ligue o GitHub Pages (o serviço grátis do GitHub que deixa páginas no ar) e grave o seu endereço. Troque <code>SEU-USUARIO</code> pelo seu nome de usuário, que o <code>gh api user</code> mostra. O <code>--scopes workflow</code> do login dá permissão para publicar a página automaticamente; o guia do lead-comenta explica cada pergunta do login.</p>
+<pre><span class="k">git clone</span> <span class="s">https://github.com/inematds/lead-comenta</span> ~/projetos/lead-comenta
+<span class="k">cd</span> ~/projetos/lead-comenta
+<span class="k">gh auth login</span> --scopes workflow
+<span class="k">git config</span> --global user.name <span class="s">"Seu Nome"</span>
+<span class="k">git config</span> --global user.email <span class="s">"voce@exemplo.com"</span>
+<span class="k">gh api user</span> -q .login           <span class="c"># seu nome de usuário</span>
+<span class="k">gh repo create</span> lead-comenta --public --source . --remote meu
+<span class="k">git push</span> meu main
+<span class="k">gh api</span> -X POST repos/SEU-USUARIO/lead-comenta/pages -f build_type=workflow</pre>
+    <p>Grave o seu endereço para valer em todo terminal novo. No Ubuntu ou WSL:</p>
+<pre><span class="k">echo</span> <span class="s">'export LEAD_BASE_URL=https://SEU-USUARIO.github.io/lead-comenta/paginas'</span> &gt;&gt; ~/.bashrc
+<span class="k">source</span> ~/.bashrc</pre>
+    <p>No Mac:</p>
+<pre><span class="k">echo</span> <span class="s">'export LEAD_BASE_URL=https://SEU-USUARIO.github.io/lead-comenta/paginas'</span> &gt;&gt; ~/.zshrc
+<span class="k">source</span> ~/.zshrc</pre>
+    <p>A sua cópia vem com a palavra de exemplo AGENTE, que aponta para o endereço do INEMA; use sempre uma palavra sua. Para cada post (troque DICAS, o tema e a fonte pelos seus):</p>
+<pre><span class="k">python3 lead.py nova</span> DICAS --tema <span class="s">"6 tarefas chatas que um agente faz"</span> --fonte <span class="s">https://inematds.github.io/empresa-de-ia/guia/</span>
+<span class="k">python3 lead.py resposta</span> DICAS    <span class="c"># textos para comentário, direct e story</span>
+<span class="k">git add</span> -A &amp;&amp; <span class="k">git commit</span> -m <span class="s">"guia DICAS"</span> &amp;&amp; <span class="k">git push</span> meu main   <span class="c"># a página vai ao ar</span></pre>
+    <p>A página leva alguns minutos para aparecer. Abra o link que o <code>lead.py resposta</code> mostra antes de postar o convite.</p>
+  </div></div>
+
+  <div class="step"><div class="b">5</div><div>
+    <h3>Passe o resto da rotina para um agente</h3>
+    <p>Relatório, contato novo, nota e cliente novo. O curso mostra como montar a ficha do agente e conferir antes de enviar. O plano de 30 dias que aparece no banner é a última aula do curso.</p>
+<pre><span class="c"># no navegador</span>
+<span class="s">https://inematds.github.io/trabalho-chato-ao-agente-v72/</span></pre>
+  </div></div>
+</div></section>
+
+<section id="roadmap"><div class="wrap">
+  <span class="chip">Por onde começar</span>
+  <h2>Comece por uma peça, não pelas cinco</h2>
+  <p class="sub">Quem tenta ligar tudo no primeiro dia volta para onde estava. Uma por semana funciona melhor.</p>
+  <div class="phase"><div class="tag">Semana 1</div><div class="d"><strong>Radar</strong><span>Rode o radar de manhã por uma semana e só escolha a pauta. Sem produzir mais do que já produz.</span></div></div>
+  <div class="phase"><div class="tag">Semana 2</div><div class="d"><strong>Carrossel</strong><span>Transforme a pauta escolhida num carrossel. Confira o resultado antes de postar.</span></div></div>
+  <div class="phase"><div class="tag">Semana 3</div><div class="d"><strong>Comenta e recebe</strong><span>Num dos carrosséis, use o "comenta PALAVRA" com a página do lead-comenta já no ar.</span></div></div>
+  <div class="phase"><div class="tag">Semana 4</div><div class="d"><strong>Muse + curso</strong><span>Se você tem canal no YouTube, o muse mostra o que repetir a partir dos vídeos que já estão lá. E o curso ajuda a tirar da sua frente a primeira tarefa repetida.</span></div></div>
+</div></section>
+
+<footer>
+  <div class="wrap">
+    <div class="pill">Python</div><div class="pill">Node.js</div><div class="pill">Claude Code</div><div class="pill">GitHub Pages</div>
+    <p style="margin-top:18px">conteudo-ao-cliente · 4 ferramentas + 1 curso, gratuitos ·
+      <a href="https://github.com/inematds/conteudo-ao-cliente">inematds/conteudo-ao-cliente</a> ·
+      <a href="https://inema.club">INEMA.CLUB</a></p>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var KEY='conteudo-ao-cliente-theme';
+    var b=document.body, t=document.getElementById('themeToggle');
+    if(localStorage.getItem(KEY)==='light'){ b.classList.add('light'); t.textContent='☀️'; }
+    t.addEventListener('click',function(){
+      var light=b.classList.toggle('light');
+      t.textContent=light?'☀️':'🌙';
+      localStorage.setItem(KEY, light?'light':'dark');
+    });
+  })();
+</script>
+</body>
+</html>
